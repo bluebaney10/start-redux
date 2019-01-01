@@ -1,12 +1,4 @@
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import {createStore,combineReducers,applyMiddleware} from "redux";
-import {Provider} from "react-redux"
-
-
 
 const initialState={
     result:15000,
@@ -77,15 +69,55 @@ const mylogger=(store)=>(next)=>(action)=>{
     next(action)
 
 }
-const store=createStore(combineReducers({emp:employeeReducer,user:userReducer}),{},applyMiddleware(mylogger));
+const store=createStore(combineReducers({employeeReducer,userReducer}),{},applyMiddleware(mylogger));
 
 store.subscribe(()=>{
-   console.log("Update Store:",store.getState());
+   //console.log("Update Store:",store.getState());
 })
+store.dispatch({
+    type:"ADD",
+    payload:15000
+});
+store.dispatch({
+    type:"ADD",
+    payload:15000
+});
+store.dispatch({
+    type:"ADD",
+    payload:30000
+});
 
-ReactDOM.render(
-    <Provider store={store}>
-    <App />
-    </Provider>
-    , document.getElementById('root')
-);
+store.dispatch({
+    type:"SUBTRACT",
+    payload:8000
+});
+
+store.dispatch({
+    type:"setName",
+    payload:"Redux"
+});
+
+store.dispatch({
+    type:"setAge",
+    payload:40
+});
+
+
+
+
+
+
+
+
+/*
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
+serviceWorker.unregister();
+*/
